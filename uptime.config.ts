@@ -6,13 +6,16 @@ const pageConfig: PageConfig = {
   links: [
     { link: 'https://github.com/lyc8503', label: 'GitHub' },
   ],
-// 监控分组
+  // 监控分组
   group: {
-    '🌐 站点监控': ['yto88_web', 'lt_frp', 'nas_frp'],
+    '🌐 站点监控': ['yto88_web', 'lt_frp', 'nas_frp', 'ip_182_45_248_250'],
   },
 }
-
 const workerConfig: WorkerConfig = {
+  kvWriteCooldownMinutes: 3,
+  // HTTP Basic认证 用户名:密码
+  passwordProtection: 'wang:Yto@2019',
+  // 监控列表
   monitors: [
 {
       id: 'yto88_web',
@@ -24,9 +27,9 @@ const workerConfig: WorkerConfig = {
     },
 {
       id: 'lt_frp',
-      name: 'lt.frp.250052.xyz:8081',
+      name: 'lt.250052.xyz:8081',
       method: 'GET',
-      target: 'http://lt.frp.250052.xyz:8081',
+      target: 'http://lt.250052.xyz:8081',
       expectedCodes: [200],
       timeout: 10000,
     },
