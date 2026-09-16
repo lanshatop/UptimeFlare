@@ -6,32 +6,29 @@ const pageConfig: PageConfig = {
   links: [
     { link: 'https://github.com/lyc8503', label: 'GitHub' },
   ],
-  // 监控分组
+// 监控分组
   group: {
-    '🌐 服务器监控': ['ip_60_216_16_211', 'ip_58_56_56_190', 'ip_182_45_248_250'],
+    '🌐 站点监控': ['yto88_web', 'lt_frp', 'nas_frp'],
   },
 }
+
 const workerConfig: WorkerConfig = {
-  kvWriteCooldownMinutes: 3,
-  // HTTP Basic认证 用户名:密码
-  passwordProtection: 'wang:Yto@2019',
-  // 监控列表
   monitors: [
-    {
-      id: 'ip_60_216_16_211',
-      name: '60.216.16.211',
-      method: 'TCP_PING',
-      target: '60.216.16.211:80',
-      tooltip: '服务器 60.216.16.211 端口80检测',
-      timeout: 5000,
+{
+      id: 'yto88_web',
+      name: 'www.yto88.cn',
+      method: 'GET',
+      target: 'https://www.yto88.cn',
+      expectedCodes: [200],
+      timeout: 10000,
     },
-    {
-      id: 'ip_58_56_56_190',
-      name: '58.56.56.190',
-      method: 'TCP_PING',
-      target: '58.56.56.190:80',
-      tooltip: '服务器 58.56.56.190 端口80检测',
-      timeout: 5000,
+{
+      id: 'lt_frp',
+      name: 'lt.frp.250052.xyz:8081',
+      method: 'GET',
+      target: 'http://lt.frp.250052.xyz:8081',
+      expectedCodes: [200],
+      timeout: 10000,
     },
     {
       id: 'ip_182_45_248_250',
