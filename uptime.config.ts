@@ -8,7 +8,7 @@ const pageConfig: PageConfig = {
   ],
   // 监控分组
   group: {
-    '🌐 站点监控': ['yto88_web', 'lt_frp', 'nas_frp', 'ip_182_45_248_250'],
+    '🌐 站点监控': ['yto88_web', 'lt_frp', 'nas_frp', 'ip_182_45_248_250','flac-music', '24bit'],
   },
 }
 const workerConfig: WorkerConfig = {
