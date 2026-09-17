@@ -22,7 +22,7 @@ const workerConfig: WorkerConfig = {
       name: 'www.yto88.cn',
       method: 'GET',
       target: 'https://www.yto88.cn',
-      expectedCodes: [999],
+      expectedCodes: [200],
       timeout: 10000,
     },
 {
