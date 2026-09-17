@@ -79,6 +79,35 @@ const workerConfig: WorkerConfig = {
       timeNow: number,
       reason: string
     ) => {
+      // 钉钉Webhook告警，状态变更（故障/恢复）推送消息
+      const statusText = isUp ? "✅ 服务恢复正常" : "🔴 服务故障离线";
+      const content = {
+        msgtype: "markdown",
+        markdown: {
+          title: `【状态监控告警】${monitor.name}`,
+          text: `
+### 【状态监控告警】${monitor.name}
+- **监控项ID**: ${monitor.id}
+- **当前状态**: ${statusText}
+- **检测地址**: ${monitor.target}
+- **故障原因**: ${reason}
+- **发生时间**: ${new Date(timeNow).toLocaleString("zh-CN", {timeZone:"Asia/Shanghai"})}
+          `
+        }
+      };
+
+      try {
+        const resp = await fetch(env.DING_WEBHOOK, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(content),
+        });
+        if (!resp.ok) {
+          console.error("钉钉推送失败", await resp.text());
+        }
+      } catch (e) {
+        console.error("钉钉webhook异常", e);
+      }
     },
     onIncident: async (
       env: any,
@@ -87,6 +116,7 @@ const workerConfig: WorkerConfig = {
       timeNow: number,
       reason: string
     ) => {
+      // 持续故障重复告警，不需要可保持空
     },
   },
 }
